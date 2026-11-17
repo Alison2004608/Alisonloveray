@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>我們的第 100 天</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#f3e9d9; --paper:#fffaf0; --paper2:#fbf1e1; --ink:#5b4636; --soft:#8c7461;
+  --pink:#f2c4c4; --pink-d:#d98f96; --tape:rgba(242,196,196,.75); --tape2:rgba(214,190,150,.7);
+  --line:#e6d6bd; --shadow:rgba(91,70,54,.18);
+  --hand:"Roboto","Noto Sans TC","Microsoft JhengHei","微軟正黑體",sans-serif;
+  --serif:"Roboto","Noto Sans TC","Microsoft JhengHei",sans-serif;
+  --sans:"Roboto","Noto Sans TC","Microsoft JhengHei","微軟正黑體","PingFang TC",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#2d231d; --paper:#41342b; --paper2:#4a3c31; --ink:#f3e6d3; --soft:#c9b49c;
+    --pink:#b97c82; --pink-d:#e3a3a9; --tape:rgba(185,124,130,.75); --tape2:rgba(160,135,100,.7);
+    --line:#5a483a; --shadow:rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2d231d; --paper:#41342b; --paper2:#4a3c31; --ink:#f3e6d3; --soft:#c9b49c;
+  --pink:#b97c82; --pink-d:#e3a3a9; --tape:rgba(185,124,130,.75); --tape2:rgba(160,135,100,.7);
+  --line:#5a483a; --shadow:rgba(0,0,0,.4);
+}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.8;
+  background-image:radial-gradient(var(--line) 1px,transparent 1.2px);background-size:22px 22px;
+  display:flex;justify-content:center;
+}
+.hand{font-family:var(--hand)}
+main{width:100%;max-width:480px;padding:28px 20px 48px;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+section{display:none;animation:in .7s ease both}
+section.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.sheet{
+  position:relative;background:var(--paper);padding:38px 26px 34px;border-radius:3px;
+  box-shadow:0 6px 18px var(--shadow);
+  background-image:repeating-linear-gradient(transparent,transparent 31px,var(--line) 32px);
+}
+.sheet.plain{background-image:none}
+.tape{position:absolute;top:-13px;left:50%;width:96px;height:26px;background:var(--tape);transform:translateX(-50%) rotate(-3deg);
+  background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.25) 0 6px,transparent 6px 12px)}
+.tape.r{background-color:var(--tape2);transform:translateX(-50%) rotate(2deg)}
+.tape.corner{left:14px;top:-6px;width:70px;transform:rotate(-35deg)}
+
+h1,h2{font-family:var(--hand);font-weight:400;margin:0;text-align:center}
+h1{font-size:2.6rem;line-height:1.3;letter-spacing:.06em}
+h2{font-size:1.7rem;margin-bottom:22px}
+.sub{text-align:center;font-family:var(--hand);color:var(--soft);font-size:1.15rem;margin:14px 0 30px}
+.small{font-size:.85rem;color:var(--soft);text-align:center;letter-spacing:.2em}
+.badge{display:block;margin:0 auto 14px;width:84px;height:84px;border-radius:50%;border:2px dashed var(--pink-d);
+  display:flex;align-items:center;justify-content:center;font-family:var(--hand);font-size:1.7rem;color:var(--pink-d);transform:rotate(-8deg)}
+
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.btn{display:block;margin:0 auto;border:0;background:var(--pink);color:#5b3a3a;font-family:var(--hand);font-size:1.2rem;
+  padding:13px 30px;border-radius:30px;box-shadow:0 3px 0 var(--pink-d);transition:transform .15s}
+:root[data-theme="dark"] .btn{color:#2d1e1e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#2d1e1e}}
+.btn:active{transform:translateY(3px);box-shadow:0 0 0 var(--pink-d)}
+
+.cards{display:flex;flex-direction:column;gap:20px}
+.card{position:relative;background:var(--paper);padding:26px 22px 20px;box-shadow:0 4px 12px var(--shadow);border-radius:3px;
+  font-size:1.05rem;opacity:0;transform:translateY(12px) rotate(var(--r,0deg));animation:card .6s ease forwards}
+.card:nth-child(1){--r:-1.2deg;animation-delay:.1s}
+.card:nth-child(2){--r:1deg;animation-delay:.35s}
+.card:nth-child(3){--r:-.6deg;animation-delay:.6s}
+@keyframes card{to{opacity:1;transform:rotate(var(--r,0deg))}}
+.card .no{font-family:var(--hand);color:var(--pink-d);font-size:1.4rem;display:block;margin-bottom:2px}
+.card .tape{width:60px;height:20px;top:-10px}
+.next{margin-top:30px}
+
+.letter p{margin:0 0 32px;font-family:var(--hand);font-size:1.08rem;line-height:32px;opacity:0;animation:fade .8s ease forwards}
+@keyframes fade{to{opacity:1}}
+.sign{text-align:right;font-family:var(--hand);font-size:1.15rem;line-height:1.7;margin-top:6px}
+
+.q{font-family:var(--hand);font-size:1.12rem;text-align:center;margin:0 0 22px}
+.step{text-align:center;font-family:var(--hand);color:var(--pink-d);font-size:1.15rem;margin-bottom:6px}
+.opts{display:flex;flex-direction:column;gap:12px}
+.opt{border:1.5px solid var(--line);background:var(--paper2);color:var(--ink);padding:13px;border-radius:10px;font-size:1.05rem;transition:.15s}
+.opt:active{background:var(--pink)}
+.opt.bad{animation:shake .4s;border-color:var(--pink-d)}
+@keyframes shake{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.msg{text-align:center;min-height:30px;margin-top:16px;font-family:var(--hand);color:var(--pink-d);font-size:1.15rem}
+.lvl{display:none}.lvl.on{display:block;animation:in .6s ease both}
+
+.env-wrap{perspective:900px;display:flex;justify-content:center;margin:12px 0 0}
+.env{position:relative;width:260px;height:170px;background:#e9d3b2;border-radius:4px;box-shadow:0 6px 16px var(--shadow)}
+.env .back{position:absolute;inset:0;background:#dcc29b;border-radius:4px}
+.env .note{position:absolute;left:14px;right:14px;top:10px;height:140px;background:var(--paper);border-radius:3px;
+  display:flex;align-items:center;justify-content:center;font-family:var(--hand);font-size:1.3rem;color:var(--pink-d);
+  transition:transform 1s .6s ease;z-index:2;text-align:center;line-height:1.5;padding:8px}
+.env .front{position:absolute;inset:0;z-index:3;border-radius:4px;
+  background:linear-gradient(to top right,#ecd8b9 49.5%,transparent 50%) left/50% 100% no-repeat,
+             linear-gradient(to top left,#e6cfab 49.5%,transparent 50%) right/50% 100% no-repeat,
+             linear-gradient(to top,#e3caa4 0,#e3caa4 100%) bottom/100% 55% no-repeat;
+  clip-path:polygon(0 0,50% 55%,100% 0,100% 100%,0 100%)}
+.env .flap{position:absolute;left:0;right:0;top:0;height:95px;background:#d4b78d;z-index:4;transform-origin:top;
+  clip-path:polygon(0 0,100% 0,50% 100%);transition:transform .7s ease,z-index 0s .35s}
+.env .seal{position:absolute;left:50%;top:78px;transform:translateX(-50%);z-index:5;width:30px;height:30px;border-radius:50%;
+  background:var(--pink-d);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.95rem;transition:opacity .3s}
+.env.open .flap{transform:rotateX(180deg);z-index:1}
+.env.open .seal{opacity:0}
+.env.open .note{transform:translateY(-62px)}
+.reveal{text-align:center;margin-top:46px;opacity:0;transition:opacity 1s 1.5s}
+.env.open ~ .reveal{opacity:1}
+.reveal .big{font-family:var(--hand);font-size:1.9rem;color:var(--pink-d);margin:0 0 6px}
+.reveal .gift{font-family:var(--hand);font-size:1.5rem;margin:6px 0 10px}
+.end{margin-top:26px;font-family:var(--hand);color:var(--soft);font-size:1.1rem;border-top:1.5px dashed var(--line);padding-top:18px}
+
+.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.hearts i{position:absolute;bottom:-30px;font-style:normal;color:var(--pink-d);opacity:.7;animation:up linear forwards}
+@keyframes up{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+.cover{position:relative;text-align:center;background:var(--paper);padding:56px 26px 40px;border-radius:3px;box-shadow:0 8px 22px var(--shadow)}
+.cover::before{content:"";position:absolute;inset:12px;border:1.5px dashed var(--line);border-radius:2px;pointer-events:none}
+.cover .tape.tl,.cover .tape.tr{width:84px;height:24px;top:20px}
+.cover .tape.tl{left:-22px;transform:rotate(-42deg)}
+.cover .tape.tr{left:auto;right:-22px;transform:rotate(42deg)}
+.eyebrow{margin:0;font-family:var(--serif);font-size:.85rem;letter-spacing:.4em;text-transform:uppercase;color:var(--soft)}
+.num{position:relative;isolation:isolate;display:inline-block;font-family:var(--serif);font-weight:300;font-size:8.2rem;line-height:1;margin-top:14px;letter-spacing:-.04em}
+.num::before{content:"";position:absolute;z-index:-1;left:-8%;right:-8%;bottom:8%;height:38%;background:var(--pink);opacity:.8;border-radius:45% 55% 50% 50%/60% 45% 55% 40%;transform:rotate(-3deg)}
+.days{display:block;font-family:var(--hand);color:var(--pink-d);font-size:1.15rem;transform:rotate(-4deg);margin:-2px 0 26px}
+.cover h1{font-size:2rem;letter-spacing:.12em}
+.rule{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--pink-d);margin:16px auto 0;width:150px;font-size:.9rem}
+.rule i{flex:1;height:1px;background:var(--pink-d);opacity:.6}
+.cover .sub{margin:12px 0 32px;font-size:1.05rem;letter-spacing:.06em}
+.cover .btn{position:relative;padding:14px 36px;outline:1.5px dashed rgba(255,255,255,.75);outline-offset:-6px}
+.stamp{position:absolute;top:30px;right:26px;width:70px;color:var(--pink-d);opacity:.75;transform:rotate(14deg)}
+.sp{position:absolute;width:14px;color:var(--pink-d);opacity:.8}
+.s1{left:30px;top:150px;width:16px}.s2{right:34px;top:240px;width:11px}.s3{left:46px;bottom:150px;width:12px}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
+</style>
+</head>
+<body>
+<div class="hearts" id="hearts"></div>
+<main>
+
+<!-- 第一頁 -->
+<section id="s0" class="on">
+  <div class="cover">
+    <span class="tape tl"></span><span class="tape tr r"></span>
+    <svg class="stamp" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="cp" d="M50,50 m-35,0 a35,35 0 1,1 70,0 a35,35 0 1,1 -70,0"/></defs><circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2 3"/><circle cx="50" cy="50" r="25" fill="none" stroke="currentColor" stroke-width="1.2"/><text font-size="9" fill="currentColor" font-family="Roboto,sans-serif"><textPath href="#cp" textLength="215">WITH LOVE · 100 DAYS · FOR YOU ·</textPath></text><text x="50" y="58" text-anchor="middle" font-size="22" fill="currentColor">♡</text></svg>
+    <svg class="sp s1" viewBox="0 0 20 20"><path d="M10 0L12 8L20 10L12 12L10 20L8 12L0 10L8 8Z" fill="currentColor"/></svg>
+    <svg class="sp s2" viewBox="0 0 20 20"><path d="M10 0L12 8L20 10L12 12L10 20L8 12L0 10L8 8Z" fill="currentColor"/></svg>
+    <svg class="sp s3" viewBox="0 0 20 20"><path d="M10 0L12 8L20 10L12 12L10 20L8 12L0 10L8 8Z" fill="currentColor"/></svg>
+    <p class="eyebrow">Our little album</p>
+    <div class="num">100</div>
+    <span class="days">days together</span>
+    <h1>我們的第 100 天</h1>
+    <div class="rule"><i></i>♡<i></i></div>
+    <p class="sub">謝謝哥哥出現在我的生命裡。</p>
+    <button class="btn" data-go="1">打開我們的故事 ♡</button>
+  </div>
+</section>
+
+<!-- 第二頁 -->
+<section id="s1">
+  <h2>和你一起的每一天</h2>
+  <div class="cards">
+    <div class="card"><span class="tape"></span><span class="no">01</span>謝謝你陪我走過好多地方。</div>
+    <div class="card"><span class="tape r"></span><span class="no">02</span>謝謝你陪我吃好多好多的飯。</div>
+    <div class="card"><span class="tape"></span><span class="no">03</span>謝謝有你一起度過的每一天，謝謝你出現在我的生命。</div>
+  </div>
+  <button class="btn next" data-go="2">看看我想說的話</button>
+</section>
+
+<!-- 第三頁 -->
+<section id="s2">
+  <div class="sheet letter">
+    <span class="tape r"></span>
+    <h2 style="margin-bottom:26px">寫給哥哥</h2>
+    <p style="animation-delay:.3s">不知不覺，我們已經一起走過 100 天了。</p>
+    <p style="animation-delay:1s">謝謝你陪我走過好多地方，吃好多的飯，也謝謝有你度過的每一天。</p>
+    <p style="animation-delay:1.7s">我很喜歡我們一起經歷的那些小事，不管是出去玩、一起吃飯，還是待在我們的小家窩在一起都讓我覺得很幸福。</p>
+    <p style="animation-delay:2.4s">謝謝你出現在我的生命裡，謝謝你的陪伴、照顧和包容。</p>
+    <p style="animation-delay:3.1s">很開心這 100 天有哥哥，希望未來還有好多好多的日子，可以繼續和你一起度過。</p>
+    <p style="animation-delay:3.8s">100 天快樂，我最喜歡的哥哥。</p>
+    <div class="sign" style="opacity:0;animation:fade .8s 4.5s forwards">你的小寶貝媗 ♡</div>
+  </div>
+  <button class="btn next" data-go="3" style="opacity:0;animation:fade .8s 4.8s forwards">還有一個小驚喜</button>
+</section>
+
+<!-- 第四頁 -->
+<section id="s3">
+  <div class="sheet plain">
+    <span class="tape"></span>
+    <h2 style="margin-bottom:12px">最後，還有一個小驚喜！</h2>
+    <p class="q" style="color:var(--soft)">準備好尋找你的 100 天禮物了嗎？完成兩個小線索，就可以找到我為你準備的驚喜。</p>
+    <hr style="border:0;border-top:1.5px dashed var(--line);margin:20px 0">
+
+    <div class="lvl on" id="l1">
+      <div class="step">第一關</div>
+      <p class="q">你每天都會在這裡忙碌，專心處理自己的事情。這次不妨看看平常比較少注意的地方。</p>
+      <div class="opts">
+        <button class="opt" data-a="0">客廳</button>
+        <button class="opt" data-a="1">房間</button>
+        <button class="opt" data-a="0">曬衣場</button>
+      </div>
+    </div>
+
+    <div class="lvl" id="l2">
+      <div class="step">第二關</div>
+      <p class="q">工作結束了，現在把目光往更低的地方移動。每天休息的地方，藏著最後的驚喜。</p>
+      <div class="opts">
+        <button class="opt" data-a="0">我的桌子下</button>
+        <button class="opt" data-a="0">你的桌子下</button>
+        <button class="opt" data-a="1">床底</button>
+      </div>
+    </div>
+    <div class="msg" id="msg"></div>
+  </div>
+</section>
+
+<!-- 第五頁 -->
+<section id="s4">
+  <div class="env-wrap">
+    <div class="env" id="env">
+      <div class="back"></div>
+      <div class="note">100 天<br>快樂 ♡</div>
+      <div class="front"></div>
+      <div class="flap"></div>
+      <div class="seal">♡</div>
+    </div>
+  </div>
+  <div class="reveal">
+    <p class="big">恭喜你完成尋寶！</p>
+    <p class="gift">你的禮物就在床底下！</p>
+    <p>快去找找看吧！<br>這是送給我們 100 天的小驚喜 ♡</p>
+    <p class="end">我們的故事，還有好多頁要一起寫。</p>
+  </div>
+</section>
+
+</main>
+<script>
+(function(){
+  var secs=document.querySelectorAll('section');
+  function go(n){
+    secs.forEach(function(s,i){s.classList.toggle('on',i===n)});
+    window.scrollTo(0,0);
+    if(n===4){setTimeout(function(){document.getElementById('env').classList.add('open');burst();},500);}
+    else if(n===1||n===3){burst(6);}
+  }
+  document.querySelectorAll('[data-go]').forEach(function(b){
+    b.addEventListener('click',function(){go(+b.getAttribute('data-go'))});
+  });
+
+  var level=1,msg=document.getElementById('msg');
+  document.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(b.getAttribute('data-a')==='1'){
+        msg.textContent='';
+        if(level===1){
+          level=2;
+          document.getElementById('l1').classList.remove('on');
+          document.getElementById('l2').classList.add('on');
+          msg.textContent='答對了 ♡ 還有最後一關';
+        }else{
+          go(4);
+        }
+      }else{
+        msg.textContent='嘻嘻 答錯了 再想想吧♡';
+        b.classList.remove('bad');void b.offsetWidth;b.classList.add('bad');
+      }
+    });
+  });
+
+  function burst(n){
+    var box=document.getElementById('hearts');n=n||16;
+    for(var i=0;i<n;i++){
+      (function(i){setTimeout(function(){
+        var h=document.createElement('i');
+        h.textContent=Math.random()>.5?'♡':'♥';
+        h.style.left=Math.random()*100+'%';
+        h.style.fontSize=(12+Math.random()*16)+'px';
+        h.style.animationDuration=(4+Math.random()*3)+'s';
+        box.appendChild(h);
+        setTimeout(function(){h.remove()},7500);
+      },i*180)})(i);
+    }
+  }
+})();
+</script>
+</body>
+</html>
